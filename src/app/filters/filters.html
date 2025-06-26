@@ -3,7 +3,7 @@
   <div class="flex gap-4">
     @for (filter of filters; track filter) {
     <button (click)="selectFilter(filter)"
-      class="py-2 px-5 pt-2 pb-[10px] rounded-full border border-border-card bg-background text-xl hover:text-text-color/70 hover:bg-background/70 shadow focus-visible:ring-3 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none cursor-pointer"
+      class="py-2 px-5 pt-2 pb-[10px] rounded-full border border-border-card bg-background text-xl hover:text-text-color/70 hover:bg-background/70 shadow focus-visible:ring-3 focus-visible:ring-red-500 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:outline-none cursor-pointer transition-colors duration-300"
       [ngClass]="{
         'bg-button-active hover:bg-button-active-hover text-background border-focus-active': selectedFilter() === filter
       }">
