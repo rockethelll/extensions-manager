@@ -1,1 +1,81 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+:root {
+  --noto: "Noto Sans", sans-serif;
+
+  /* Neutral */
+  --background: #fbfdfe; /* neutral-0 */
+  --border-card: #d6e2f5; /* neutral-200 */
+  --button: #eee; /* neutral-100 */
+  --button-hover: #c6c6c6; /* neutral-300 */
+  --text-color: #091540; /* neutral-900 */
+
+  --neutral-900: #091540;
+  --neutral-800: #202535;
+  --neutral-700: #2f364b;
+  --neutral-600: #535868;
+
+  /* Red */
+  --red-700: #c7231a;
+  --red-500: #de4840;
+  --red-400: #f25c54;
+
+  /* Gradient */
+  --custom-gradient: linear-gradient(180deg, #ebf2fc 0%, #eefbf9 100%);
+}
+
+@theme inline {
+  --font-noto: var(--noto);
+  --color-custom-gradient: var(--custom-gradient);
+  --color-background: var(--background);
+  --color-border-card: var(--border-card);
+  --color-button: var(--button);
+  --color-button-hover: var(--button-hover);
+  --color-text-color: var(--text-color);
+
+  --color-red-700: var(--red-700);
+  --color-red-500: var(--red-500);
+  --color-red-400: var(--red-400);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-0: var(--neutral-0);
+}
+
+.dark {
+  /* Neutral */
+  --background: #202535; /* neutral-800 */
+  --border-card: #535868; /* neutral-600 */
+  --button: #2f364b; /* neutral-700 */
+  --button-hover: #c6c6c6; /* neutral-300 */
+  --button-hover: #535868; /* neutral-600 */
+  --text-color: #fbfdfe; /* neutral-0 */
+
+  --neutral-900: #091540;
+  --neutral-200: #d6e2f5;
+  --neutral-100: #eee;
+  --neutral-0: #fbfdfe;
+
+  /* Red */
+  --red-700: #c7231a;
+  --red-500: #de4840;
+  --red-400: #f25c54;
+
+  /* Gradient */
+  --custom-gradient: linear-gradient(180deg, #04091b 0%, #091540 100%);
+}
+
+@layer base {
+  body {
+    @apply font-noto;
+  }
+}
+
+@layer utilities {
+  .bg-custom-gradient {
+    background-image: var(--custom-gradient);
+  }
+}

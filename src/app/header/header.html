@@ -1,0 +1,17 @@
+<div
+  class="flex items-center justify-between w-[345px] bg-background px-2 py-2 rounded-[10px] border border-border-card shadow-md">
+  <div class="flex items-center gap-3 justify-start w-full">
+    <img src="./images/logo.png" alt="Logo" />
+    <h1 class="text-text-color text-2xl font-bold">
+      Extensions
+    </h1>
+  </div>
+  <button (click)="toggleMode()"
+    class="bg-button rounded-lg h-12 w-12 flex items-center justify-center hover:bg-button-hover transition-colors duration-300 cursor-pointer">
+    <img [src]="darkModeSignal() ? './images/icon-sun.svg' : './images/icon-moon.svg'"
+      [alt]="darkModeSignal() ? 'Light mode' : 'Dark mode'">
+      <span class="sr-only">
+        Toggle dark mode
+      </span>
+  </button>
+</div>
