@@ -3,9 +3,6 @@ import { render, screen } from '@testing-library/angular';
 import userEvent from '@testing-library/user-event';
 
 describe('Header', () => {
-  // beforeEach(async () => {
-  //   await render(Header);
-  // });
   it('should render the header component', async () => {
     await render(Header);
     expect(screen.getByText('Extensions')).toBeTruthy();
