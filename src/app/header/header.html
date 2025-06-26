@@ -1,14 +1,14 @@
 <header
   class="flex items-center justify-between w-[345px] bg-background px-2 py-2 rounded-[10px] border border-border-card shadow-md"
   role="banner" aria-label="Browser Extensions Manager Header">
-  <div class="flex items-center gap-3 justify-start w-full">
+  <div class="flex gap-3 justify-start items-center w-full">
     <img src="./images/logo.png" alt="Browser Extensions Manager Logo" />
-    <h1 class="text-text-color text-2xl font-bold">
+    <h1 class="text-2xl font-bold text-text-color">
       Extensions
     </h1>
   </div>
   <button (click)="toggleMode()"
-    class="bg-button rounded-lg h-12 w-12 flex items-center justify-center hover:bg-button-hover transition-colors duration-300 cursor-pointer"
+    class="flex justify-center items-center w-12 h-12 rounded-lg transition-colors duration-300 cursor-pointer bg-button hover:bg-button-hover"
     [attr.aria-pressed]="darkModeSignal()" aria-label="Toggle dark mode" type="button">
     <img [src]="darkModeSignal() ? './images/icon-sun.svg' : './images/icon-moon.svg'"
       [alt]="darkModeSignal() ? 'Switch to light mode' : 'Switch to dark mode'">
