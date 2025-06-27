@@ -1,5 +1,8 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
+@import "@spartan-ng/brain/hlm-tailwind-preset.css";
 
 :root {
   --noto: "Noto Sans", sans-serif;
@@ -13,6 +16,10 @@
   --button-active: #de4840; /* red-500 */
   --button-active-hover: #f25c54; /* red-400 */
   --focus-active: #f25c54; /* red-400 */
+  --text-card: #535868; /* neutral-600 */
+  --switch-checked: #c7231a; /* red-700 */
+  --neutral-0: #fbfdfe; /* neutral-0 */
+  --bg-switch: #c6c6c6; /* neutral-300 */
 
   --neutral-900: #091540;
   --neutral-800: #202535;
@@ -26,6 +33,27 @@
 
   /* Gradient */
   --custom-gradient: linear-gradient(180deg, #ebf2fc 0%, #eefbf9 100%);
+
+  --foreground: 0 0% 3.9%;
+  --muted: 0 0% 96.1%;
+  --muted-foreground: 0 0% 45.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 0 0% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 0 0% 3.9%;
+  --border: 0 0% 89.8%;
+  --input: 0 0% 89.8%;
+  --primary: 0 0% 9%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 0 0% 96.1%;
+  --secondary-foreground: 0 0% 9%;
+  --accent: 0 0% 96.1%;
+  --accent-foreground: 0 0% 9%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 0 0% 3.9%;
+  --radius: 0.5rem;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -39,6 +67,10 @@
   --color-button-active: var(--button-active);
   --color-button-active-hover: var(--button-active-hover);
   --color-focus-active: var(--focus-active);
+  --color-text-card: var(--text-card);
+  --color-switch-checked: var(--switch-checked);
+  --color-neutral-300: var(--neutral-300);
+  --color-bg-switch: var(--bg-switch);
 
   --color-red-700: var(--red-700);
   --color-red-500: var(--red-500);
@@ -56,17 +88,20 @@
   --background: #202535; /* neutral-800 */
   --border-card: #535868; /* neutral-600 */
   --button: #2f364b; /* neutral-700 */
-  --button-hover: #c6c6c6; /* neutral-300 */
   --button-hover: #535868; /* neutral-600 */
   --text-color: #fbfdfe; /* neutral-0 */
   --button-active: #f25c54; /* red-400 */
   --button-active-hover: #de4840; /* red-700 */
   --focus-active: #091540; /* neutral-900 */
+  --text-card: #c6c6c6; /* neutral-300 */
+  --switch-checked: #f25c54; /* red-400 */
+  --neutral-0: #fbfdfe; /* neutral-0 */
+  --neutral-300: #c6c6c6; /* neutral-300 */
+  --bg-switch: #535868; /* neutral-600 */
 
   --neutral-900: #091540;
   --neutral-200: #d6e2f5;
   --neutral-100: #eee;
-  --neutral-0: #fbfdfe;
 
   /* Red */
   --red-700: #c7231a;
@@ -75,11 +110,31 @@
 
   /* Gradient */
   --custom-gradient: linear-gradient(180deg, #04091b 0%, #091540 100%);
+
+  --foreground: 0 0% 98%;
+  --muted: 0 0% 14.9%;
+  --muted-foreground: 0 0% 63.9%;
+  --popover: 0 0% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 0 0% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 0 0% 14.9%;
+  --input: 0 0% 14.9%;
+  --primary: 0 0% 98%;
+  --primary-foreground: 0 0% 9%;
+  --secondary: 0 0% 14.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 0 0% 14.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 0 0% 83.1%;
+  color-scheme: dark;
 }
 
 @layer base {
   body {
-    @apply font-noto;
+    @apply font-noto text-text-color transition-colors duration-300;
   }
 }
 
@@ -88,3 +143,4 @@
     background-image: var(--custom-gradient);
   }
 }
+

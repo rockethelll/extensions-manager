@@ -5,6 +5,7 @@ import { NgClass } from '@angular/common';
   selector: 'app-filters',
   imports: [NgClass],
   templateUrl: './filters.html',
+  standalone: true,
 })
 export class Filters {
   filters = ['All', 'Active', 'Inactive'];
