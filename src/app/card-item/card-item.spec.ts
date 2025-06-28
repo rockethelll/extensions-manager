@@ -16,9 +16,7 @@ describe('CardItem', () => {
   };
 
   const mockExtensionService = {
-    removeExtension: jest.fn(() => of({})),
     removeExtensionById: jest.fn(() => of({})),
-    onCheckedChanged: jest.fn(() => of({})),
   };
 
   beforeEach(() => {
