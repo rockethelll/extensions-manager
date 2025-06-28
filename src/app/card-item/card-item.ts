@@ -12,7 +12,6 @@ import {
 } from '@angular/core';
 import { Extension } from '../extension.model';
 import { ExtensionService } from '../extension.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-item',
@@ -21,10 +20,7 @@ import { Router } from '@angular/router';
   standalone: true,
 })
 export class CardItem implements OnChanges {
-  constructor(
-    private extensionService: ExtensionService,
-    private router: Router
-  ) {}
+  constructor(private extensionService: ExtensionService) {}
 
   @Input() extension!: Extension;
   isActive = false;
