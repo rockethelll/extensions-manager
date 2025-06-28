@@ -43,4 +43,38 @@ describe('ListExtension', () => {
         .find((e) => e.id === EXTENSIONS[0].id)
     ).toBeUndefined();
   });
+
+  it('should update selectedFilter and filter extensions when onFilterChanged is called', async () => {
+    const { fixture } = await render(ListExtension, {
+      providers: [
+        { provide: ExtensionService, useValue: mockExtensionService },
+      ],
+    });
+    fixture.componentInstance.extensionList.set(EXTENSIONS);
+    fixture.detectChanges();
+
+    // Set filter to 'Active'
+    fixture.componentInstance.onFilterChanged('Active');
+    fixture.detectChanges();
+    const activeExtensions = EXTENSIONS.filter((e) => e.isActive);
+    expect(fixture.componentInstance.selectedFilter()).toBe('Active');
+    expect(fixture.componentInstance.filteredExtensions()).toEqual(
+      activeExtensions
+    );
+
+    // Set filter to 'Inactive'
+    fixture.componentInstance.onFilterChanged('Inactive');
+    fixture.detectChanges();
+    const inactiveExtensions = EXTENSIONS.filter((e) => !e.isActive);
+    expect(fixture.componentInstance.selectedFilter()).toBe('Inactive');
+    expect(fixture.componentInstance.filteredExtensions()).toEqual(
+      inactiveExtensions
+    );
+
+    // Set filter to 'All'
+    fixture.componentInstance.onFilterChanged('All');
+    fixture.detectChanges();
+    expect(fixture.componentInstance.selectedFilter()).toBe('All');
+    expect(fixture.componentInstance.filteredExtensions()).toEqual(EXTENSIONS);
+  });
 });
