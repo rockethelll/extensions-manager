@@ -2,16 +2,8 @@ import { HlmSwitchComponent } from '../../../libs/ui/ui-switch-helm/src/lib/hlm-
 
 import { HlmButtonDirective } from '../../../libs/ui/ui-button-helm/src/lib/hlm-button.directive';
 
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Extension } from '../extension.model';
-import { ExtensionService } from '../extension.service';
 
 @Component({
   selector: 'app-card-item',
@@ -20,11 +12,9 @@ import { ExtensionService } from '../extension.service';
   standalone: true,
 })
 export class CardItem implements OnChanges {
-  constructor(private extensionService: ExtensionService) {}
-
   @Input() extension!: Extension;
+  @Input() onDelete: (extension: Extension) => void = () => {};
   isActive = false;
-  @Output() extensionRemoved = new EventEmitter<number>();
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['extension'] && this.extension) {
@@ -40,8 +30,8 @@ export class CardItem implements OnChanges {
   }
 
   removeExtension(extension: Extension) {
-    this.extensionService
-      .removeExtensionById(extension.id)
-      .subscribe(() => this.extensionRemoved.emit(extension.id));
+    if (this.onDelete) {
+      this.onDelete(extension);
+    }
   }
 }

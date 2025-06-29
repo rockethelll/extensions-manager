@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Extension } from './extension.model';
@@ -10,7 +9,7 @@ import { EXTENSIONS } from './mock-data';
 export class ExtensionService {
   private extensions: Extension[] = EXTENSIONS;
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   getExtensions(): Observable<Extension[]> {
     return of(this.extensions);

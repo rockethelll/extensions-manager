@@ -48,17 +48,14 @@ describe('CardItem', () => {
       componentProperties: { extension: mockExtension },
     });
     const extensionRemovedSpy = jest.fn();
-    fixture.componentInstance.extensionRemoved.subscribe(extensionRemovedSpy);
+    fixture.componentInstance.onDelete = extensionRemovedSpy;
 
     const removeButton = screen.getByRole('button', { name: 'Remove' });
     await user.click(removeButton);
     await fixture.whenStable();
     fixture.detectChanges();
 
-    expect(mockExtensionService.removeExtensionById).toHaveBeenCalledWith(
-      mockExtension.id
-    );
-    expect(extensionRemovedSpy).toHaveBeenCalledWith(mockExtension.id);
+    expect(extensionRemovedSpy).toHaveBeenCalledWith(mockExtension);
   });
 
   it('should toggle the extension when the switch is clicked', async () => {

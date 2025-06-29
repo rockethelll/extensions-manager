@@ -40,4 +40,10 @@ export class ListExtension implements OnInit {
   onFilterChanged(filter: string) {
     this.selectedFilter.set(filter);
   }
+
+  deleteExtension(extension: Extension) {
+    this.extensionService.removeExtensionById(extension.id).subscribe(() => {
+      this.extensionList.set(this.extensionList().filter((ext) => ext.id !== extension.id));
+    });
+  }
 }
