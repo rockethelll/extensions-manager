@@ -1,8 +1,8 @@
 <section class="w-full">
   <app-filters (filterChanged)="onFilterChanged($event)"></app-filters>
   <div class="flex flex-col gap-3">
-    @for (extension of filteredExtensions(); track extension.id) {
-    <app-card-item [extension]="extension" [onDelete]="deleteExtension"></app-card-item>
+    @for (extension of filteredExtensions; track extension.id) {
+    <app-card-item [extension]="extension" [onDelete]="onDelete"></app-card-item>
     }
   </div>
 </section>

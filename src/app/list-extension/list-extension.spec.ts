@@ -31,16 +31,16 @@ describe('ListExtension', () => {
       ],
     });
     // Set initial list
-    fixture.componentInstance.extensionList.set(EXTENSIONS);
+    fixture.componentInstance.extensionList = [...EXTENSIONS];
     fixture.detectChanges();
     // Remove the first extension
     fixture.componentInstance.onExtensionRemoved(EXTENSIONS[0].id);
     fixture.detectChanges();
     // The removed extension should not be in the list
     expect(
-      fixture.componentInstance
-        .extensionList()
-        .find((e) => e.id === EXTENSIONS[0].id)
+      fixture.componentInstance.extensionList.find(
+        (e: any) => e.id === EXTENSIONS[0].id
+      )
     ).toBeUndefined();
   });
 
@@ -50,15 +50,15 @@ describe('ListExtension', () => {
         { provide: ExtensionService, useValue: mockExtensionService },
       ],
     });
-    fixture.componentInstance.extensionList.set(EXTENSIONS);
+    fixture.componentInstance.extensionList = [...EXTENSIONS];
     fixture.detectChanges();
 
     // Set filter to 'Active'
     fixture.componentInstance.onFilterChanged('Active');
     fixture.detectChanges();
     const activeExtensions = EXTENSIONS.filter((e) => e.isActive);
-    expect(fixture.componentInstance.selectedFilter()).toBe('Active');
-    expect(fixture.componentInstance.filteredExtensions()).toEqual(
+    expect(fixture.componentInstance.selectedFilter).toBe('Active');
+    expect(fixture.componentInstance.filteredExtensions).toEqual(
       activeExtensions
     );
 
@@ -66,15 +66,15 @@ describe('ListExtension', () => {
     fixture.componentInstance.onFilterChanged('Inactive');
     fixture.detectChanges();
     const inactiveExtensions = EXTENSIONS.filter((e) => !e.isActive);
-    expect(fixture.componentInstance.selectedFilter()).toBe('Inactive');
-    expect(fixture.componentInstance.filteredExtensions()).toEqual(
+    expect(fixture.componentInstance.selectedFilter).toBe('Inactive');
+    expect(fixture.componentInstance.filteredExtensions).toEqual(
       inactiveExtensions
     );
 
     // Set filter to 'All'
     fixture.componentInstance.onFilterChanged('All');
     fixture.detectChanges();
-    expect(fixture.componentInstance.selectedFilter()).toBe('All');
-    expect(fixture.componentInstance.filteredExtensions()).toEqual(EXTENSIONS);
+    expect(fixture.componentInstance.selectedFilter).toBe('All');
+    expect(fixture.componentInstance.filteredExtensions).toEqual(EXTENSIONS);
   });
 });

@@ -20,16 +20,20 @@ describe('Header', () => {
   it('should toggle the dark mode when the dark mode toggle button is clicked', async () => {
     const user = userEvent.setup();
     const { fixture } = await render(Header);
-    const darkModeToggleButton = screen.getByText('Toggle dark mode');
+    const darkModeToggleButton = screen.getByRole('button', {
+      name: /toggle dark mode/i,
+    });
 
     // Check initial state: light mode
-    expect(fixture.componentInstance.darkModeSignal()).toBe(false);
-    expect(screen.getByAltText(/dark/i)).toBeTruthy();
+    expect(fixture.componentInstance.isDarkMode).toBe(false);
+    expect(screen.getByAltText(/switch to dark mode/i)).toBeTruthy();
 
     await user.click(darkModeToggleButton);
+    fixture.detectChanges();
+    await fixture.whenStable();
 
     // Check state after toggle: dark mode
-    expect(fixture.componentInstance.darkModeSignal()).toBe(true);
-    expect(screen.getByAltText(/light/i)).toBeTruthy();
+    expect(fixture.componentInstance.isDarkMode).toBe(true);
+    expect(screen.getByAltText(/switch to light mode/i)).toBeTruthy();
   });
 });

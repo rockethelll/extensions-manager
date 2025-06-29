@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, computed } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Extension } from '../extension.model';
 import { ExtensionService } from '../extension.service';
 import { Filters } from '../filters/filters';
@@ -12,16 +12,16 @@ import { CardItem } from '../card-item/card-item';
 export class ListExtension implements OnInit {
   constructor(private extensionService: ExtensionService) {}
 
-  extensionList = signal<Extension[]>([]);
-  selectedFilter = signal('All');
+  extensionList: Extension[] = [];
+  selectedFilter: string = 'All';
 
-  filteredExtensions = computed(() => {
-    const filter = this.selectedFilter();
-    const list = this.extensionList();
+  get filteredExtensions(): Extension[] {
+    const filter = this.selectedFilter;
+    const list = this.extensionList;
     if (filter === 'Active') return list.filter((e) => e.isActive);
     if (filter === 'Inactive') return list.filter((e) => !e.isActive);
     return list;
-  });
+  }
 
   ngOnInit() {
     this.loadExtensions();
@@ -29,21 +29,27 @@ export class ListExtension implements OnInit {
 
   loadExtensions() {
     this.extensionService.getExtensions().subscribe((data) => {
-      this.extensionList.set(data || []);
+      this.extensionList = data || [];
     });
   }
 
   onExtensionRemoved(id: number) {
-    this.extensionList.set(this.extensionList().filter((ext) => ext.id !== id));
+    this.extensionList = this.extensionList.filter((ext) => ext.id !== id);
   }
 
   onFilterChanged(filter: string) {
-    this.selectedFilter.set(filter);
+    this.selectedFilter = filter;
   }
 
   deleteExtension(extension: Extension) {
     this.extensionService.removeExtensionById(extension.id).subscribe(() => {
-      this.extensionList.set(this.extensionList().filter((ext) => ext.id !== extension.id));
+      this.extensionList = this.extensionList.filter(
+        (ext) => ext.id !== extension.id
+      );
     });
   }
+
+  onDelete = (extension: Extension) => {
+    this.deleteExtension(extension);
+  };
 }

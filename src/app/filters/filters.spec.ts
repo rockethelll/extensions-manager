@@ -23,18 +23,18 @@ describe('Filters', () => {
     const activeButton = screen.getByText('Active');
     const inactiveButton = screen.getByText('Inactive');
 
-    expect(fixture.componentInstance.selectedFilter()).toBe('All');
+    expect(fixture.componentInstance.selectedFilter).toBe('All');
 
     await user.click(activeButton);
 
-    expect(fixture.componentInstance.selectedFilter()).toBe('Active');
+    expect(fixture.componentInstance.selectedFilter).toBe('Active');
 
     await user.click(inactiveButton);
 
-    expect(fixture.componentInstance.selectedFilter()).toBe('Inactive');
+    expect(fixture.componentInstance.selectedFilter).toBe('Inactive');
 
     await user.click(allButton);
 
-    expect(fixture.componentInstance.selectedFilter()).toBe('All');
+    expect(fixture.componentInstance.selectedFilter).toBe('All');
   });
 });

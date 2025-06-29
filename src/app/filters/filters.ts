@@ -1,4 +1,4 @@
-import { Component, signal, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 @Component({
@@ -9,12 +9,12 @@ import { NgClass } from '@angular/common';
 })
 export class Filters {
   filters = ['All', 'Active', 'Inactive'];
-  selectedFilter = signal('All');
+  selectedFilter: string = 'All';
 
   @Output() filterChanged = new EventEmitter<string>();
 
   selectFilter(filter: string) {
-    this.selectedFilter.set(filter);
+    this.selectedFilter = filter;
     this.filterChanged.emit(filter);
   }
 }

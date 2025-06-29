@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,12 +6,10 @@ import { Component, signal } from '@angular/core';
   templateUrl: './header.html',
 })
 export class Header {
-  private isDarkMode = false;
-  public darkModeSignal = signal(this.isDarkMode);
+  public isDarkMode = false;
 
   toggleMode() {
     this.isDarkMode = !this.isDarkMode;
-    this.darkModeSignal.set(this.isDarkMode);
     document.body.classList.toggle('dark', this.isDarkMode);
   }
 }
