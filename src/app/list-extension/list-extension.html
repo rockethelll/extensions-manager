@@ -2,9 +2,9 @@
   <div class="w-full">
     <app-filters (filterChanged)="onFilterChanged($event)"></app-filters>
   </div>
-  <div class="flex flex-col gap-3">
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
     @if (filteredExtensions.length === 0) {
-    <div class="text-center text-gray-500 py-8">
+    <div class="text-gray-500 py-8 col-span-full">
       Aucune extension trouvée.
     </div>
     } @else {
