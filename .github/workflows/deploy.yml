@@ -44,4 +44,4 @@ jobs:
           BRANCH: build
           FOLDER: dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MESSAGE: 'Build: ({sha}) {msg}' # The commit message
+          MESSAGE: "Build: ({sha}) {msg}" # The commit message
