@@ -1,8 +1,16 @@
-<section class="w-full">
-  <app-filters (filterChanged)="onFilterChanged($event)"></app-filters>
+<section class="w-full flex flex-col items-center ">
+  <div class="w-full">
+    <app-filters (filterChanged)="onFilterChanged($event)"></app-filters>
+  </div>
   <div class="flex flex-col gap-3">
+    @if (filteredExtensions.length === 0) {
+    <div class="text-center text-gray-500 py-8">
+      Aucune extension trouvée.
+    </div>
+    } @else {
     @for (extension of filteredExtensions; track extension.id) {
-    <app-card-item [extension]="extension" [onDelete]="onDelete"></app-card-item>
+    <app-card-item [extension]="extension"></app-card-item>
+    }
     }
   </div>
 </section>

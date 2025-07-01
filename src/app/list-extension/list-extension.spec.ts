@@ -1,46 +1,52 @@
 import { ListExtension } from './list-extension';
 import { render, screen } from '@testing-library/angular';
 import { ExtensionService } from '../extension.service';
-import { of } from 'rxjs';
+import { signal } from '@angular/core';
 import { EXTENSIONS } from '../mock-data';
+
+// Helper to create a fresh signal for each test
+function createExtensionsSignal(initial = EXTENSIONS) {
+  return signal([...initial]);
+}
 
 describe('ListExtension', () => {
   let mockExtensionService: any;
+  let extensionsSignal: any;
 
   beforeEach(() => {
+    extensionsSignal = createExtensionsSignal();
     mockExtensionService = {
-      getExtensions: jest.fn(() => of(EXTENSIONS)),
+      getExtensionsSignal: jest.fn(() => extensionsSignal),
+      removeExtensionById: jest.fn((id: number) => {
+        extensionsSignal.update((exts: any[]) =>
+          exts.filter((e) => e.id !== id)
+        );
+      }),
     };
   });
 
-  it('should render the list extension component and call loadExtensions', async () => {
+  it('should render the list extension component and call getExtensionsSignal', async () => {
     await render(ListExtension, {
       providers: [
         { provide: ExtensionService, useValue: mockExtensionService },
       ],
     });
-    expect(mockExtensionService.getExtensions).toHaveBeenCalled();
+    expect(mockExtensionService.getExtensionsSignal).toHaveBeenCalled();
     // Check that at least one extension is rendered
     expect(screen.getByText(EXTENSIONS[0].name)).toBeTruthy();
   });
 
-  it('should remove an extension from the list when onExtensionRemoved is called', async () => {
-    const { fixture } = await render(ListExtension, {
+  it('should remove an extension from the list when removeExtensionById is called', async () => {
+    await render(ListExtension, {
       providers: [
         { provide: ExtensionService, useValue: mockExtensionService },
       ],
     });
-    // Set initial list
-    fixture.componentInstance.extensionList = [...EXTENSIONS];
-    fixture.detectChanges();
     // Remove the first extension
-    fixture.componentInstance.onExtensionRemoved(EXTENSIONS[0].id);
-    fixture.detectChanges();
+    mockExtensionService.removeExtensionById(EXTENSIONS[0].id);
     // The removed extension should not be in the list
     expect(
-      fixture.componentInstance.extensionList.find(
-        (e: any) => e.id === EXTENSIONS[0].id
-      )
+      extensionsSignal().find((e: any) => e.id === EXTENSIONS[0].id)
     ).toBeUndefined();
   });
 
@@ -50,9 +56,6 @@ describe('ListExtension', () => {
         { provide: ExtensionService, useValue: mockExtensionService },
       ],
     });
-    fixture.componentInstance.extensionList = [...EXTENSIONS];
-    fixture.detectChanges();
-
     // Set filter to 'Active'
     fixture.componentInstance.onFilterChanged('Active');
     fixture.detectChanges();

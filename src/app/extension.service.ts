@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Extension } from './extension.model';
 import { EXTENSIONS } from './mock-data';
@@ -7,16 +7,13 @@ import { EXTENSIONS } from './mock-data';
   providedIn: 'root',
 })
 export class ExtensionService {
-  private extensions: Extension[] = EXTENSIONS;
+  extensions = signal<Extension[]>(EXTENSIONS);
 
-  constructor() {}
-
-  getExtensions(): Observable<Extension[]> {
-    return of(this.extensions);
+  getExtensionsSignal() {
+    return this.extensions;
   }
 
   removeExtensionById(id: number) {
-    this.extensions = this.extensions.filter((ext) => ext.id !== id);
-    return of(this.extensions);
+    this.extensions.update((ext) => ext.filter((ext) => ext.id !== id));
   }
 }

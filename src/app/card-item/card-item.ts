@@ -4,6 +4,7 @@ import { HlmButtonDirective } from '../../../libs/ui/ui-button-helm/src/lib/hlm-
 
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Extension } from '../extension.model';
+import { ExtensionService } from '../extension.service';
 
 @Component({
   selector: 'app-card-item',
@@ -12,8 +13,9 @@ import { Extension } from '../extension.model';
   standalone: true,
 })
 export class CardItem implements OnChanges {
+  constructor(private extensionService: ExtensionService) {}
   @Input() extension!: Extension;
-  @Input() onDelete: (extension: Extension) => void = () => {};
+
   isActive = false;
 
   ngOnChanges(changes: SimpleChanges) {
@@ -30,8 +32,8 @@ export class CardItem implements OnChanges {
   }
 
   removeExtension(extension: Extension) {
-    if (this.onDelete) {
-      this.onDelete(extension);
+    if (confirm('Are you sure you want to remove this extension?')) {
+      this.extensionService.removeExtensionById(extension.id);
     }
   }
 }
